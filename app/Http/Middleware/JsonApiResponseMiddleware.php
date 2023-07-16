@@ -27,6 +27,11 @@ final class JsonApiResponseMiddleware
             values: 'application/vnd.api+json',
         );
 
+        $response->headers->set(
+            key: 'Accept',
+            values: 'application/vnd.api+json',
+        );
+
         return $response;
     }
 }
