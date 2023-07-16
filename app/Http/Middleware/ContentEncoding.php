@@ -20,6 +20,7 @@ class ContentEncoding
 
             $response->headers->add([
                 'Content-Encoding' => 'gzip',
+                //                'X-Vapor-Base64-Encode' => 'True',
             ]);
         }
 
