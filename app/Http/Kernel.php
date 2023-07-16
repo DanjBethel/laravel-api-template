@@ -4,62 +4,67 @@ declare(strict_types=1);
 
 namespace App\Http;
 
+use App\Http\Middleware\TrimStrings;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\CacheHeaders;
-use App\Http\Middleware\EnsureEmailIsVerified;
-use App\Http\Middleware\JsonApiResponseMiddleware;
-use App\Http\Middleware\PreventRequestsDuringMaintenance;
-use App\Http\Middleware\RedirectIfAuthenticated;
-use App\Http\Middleware\TrimStrings;
 use App\Http\Middleware\TrustProxies;
-use App\Http\Middleware\ValidateSignature;
-use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
+use App\Http\Middleware\ContentEncoding;
 use Illuminate\Auth\Middleware\Authorize;
-use Illuminate\Auth\Middleware\RequirePassword;
-use Illuminate\Foundation\Http\Kernel as HttpKernel;
-use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
-use Illuminate\Foundation\Http\Middleware\ValidatePostSize;
+use App\Http\Middleware\ValidateSignature;
 use Illuminate\Http\Middleware\HandleCors;
+use App\Http\Middleware\EnsureEmailIsVerified;
+use Illuminate\Auth\Middleware\RequirePassword;
 use Illuminate\Http\Middleware\SetCacheHeaders;
-use Illuminate\Routing\Middleware\SubstituteBindings;
+use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Http\Middleware\JsonApiResponseMiddleware;
+use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Illuminate\Routing\Middleware\ThrottleRequests;
+use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
+use App\Http\Middleware\PreventRequestsDuringMaintenance;
+use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
+use Illuminate\Foundation\Http\Middleware\ValidatePostSize;
+use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 
 final class Kernel extends HttpKernel
 {
-    protected $middleware = [
-        // \App\Http\Middleware\TrustHosts::class,
-        TrustProxies::class,
-        HandleCors::class,
-        PreventRequestsDuringMaintenance::class,
-        ValidatePostSize::class,
-        TrimStrings::class,
-        ConvertEmptyStringsToNull::class,
-    ];
+    protected $middleware
+        = [
+            // \App\Http\Middleware\TrustHosts::class,
+            TrustProxies::class,
+            HandleCors::class,
+            PreventRequestsDuringMaintenance::class,
+            ValidatePostSize::class,
+            TrimStrings::class,
+            ConvertEmptyStringsToNull::class,
+        ];
 
-    protected $middlewareGroups = [
-        'web' => [],
+    protected $middlewareGroups
+        = [
+            'web' => [],
 
-        'api' => [
-            EnsureFrontendRequestsAreStateful::class,
-            ThrottleRequests::class.':api',
-            SubstituteBindings::class,
-            JsonApiResponseMiddleware::class,
-            CacheHeaders::class,
-        ],
-    ];
+            'api' => [
+                EnsureFrontendRequestsAreStateful::class,
+                ThrottleRequests::class.':api',
+                SubstituteBindings::class,
+                JsonApiResponseMiddleware::class,
+                ContentEncoding::class,
+                CacheHeaders::class,
+            ],
+        ];
 
-    protected $middlewareAliases = [
-        'auth' => Authenticate::class,
-        'auth.basic' => AuthenticateWithBasicAuth::class,
-        'auth.session' => AuthenticateSession::class,
-        'cache.headers' => SetCacheHeaders::class,
-        'can' => Authorize::class,
-        'guest' => RedirectIfAuthenticated::class,
-        'password.confirm' => RequirePassword::class,
-        'signed' => ValidateSignature::class,
-        'throttle' => ThrottleRequests::class,
-        'verified' => EnsureEmailIsVerified::class,
-    ];
+    protected $middlewareAliases
+        = [
+            'auth'             => Authenticate::class,
+            'auth.basic'       => AuthenticateWithBasicAuth::class,
+            'auth.session'     => AuthenticateSession::class,
+            'cache.headers'    => SetCacheHeaders::class,
+            'can'              => Authorize::class,
+            'guest'            => RedirectIfAuthenticated::class,
+            'password.confirm' => RequirePassword::class,
+            'signed'           => ValidateSignature::class,
+            'throttle'         => ThrottleRequests::class,
+            'verified'         => EnsureEmailIsVerified::class,
+        ];
 }
