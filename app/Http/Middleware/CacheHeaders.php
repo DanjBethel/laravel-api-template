@@ -21,18 +21,18 @@ final class CacheHeaders
         if (Auth::check()) {
             $response->setCache(
                 options: [
-                    'private' => true,
-                    'max_age' => 0,
+                    'private'  => true,
+                    'max_age'  => 0,
                     's_maxage' => 0,
-                    'no_store' => true
+                    'no_store' => true,
                 ],
             );
         } else {
             $response->setCache(
                 options: [
-                    'public' => true,
-                    'max_age' => 60,
-                    's_maxage' => 60,
+                    'public'   => true,
+                    'max_age'  => 360,
+                    's_maxage' => 360,
                 ],
             );
 
