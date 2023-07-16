@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Route;
  * Ping Routes
  */
 Route::prefix('ping')->as('ping:')->group(
-    base_path('routes/v1/ping.php'),
+    base_path('routes/api/v1/ping.php'),
 );
 
 
-require __DIR__ . '/../auth.php';
+require __DIR__.'/../../auth.php';
