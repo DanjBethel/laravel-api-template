@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\V1\Ping\ShowController;
-use Illuminate\Testing\Fluent\AssertableJson;
 use JustSteveKing\StatusCode\Http;
+use Illuminate\Testing\Fluent\AssertableJson;
+use App\Http\Controllers\Api\V1\Ping\ShowController;
 
 use function Pest\Laravel\getJson;
 
@@ -23,6 +23,6 @@ it('returns the correct payload', function (): void {
         status: Http::OK->value,
     )->assertJson(
         fn (AssertableJson $json) => $json
-         ->where('message', trans('messages.service.online'))->etc()
+            ->where('message', trans('messages.service.online'))->etc()
     );
 });

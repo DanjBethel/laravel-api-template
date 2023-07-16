@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\V1\Ping\ShowController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\V1\Ping\ShowController;
 
 Route::get(
     '/',

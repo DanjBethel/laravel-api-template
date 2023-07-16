@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\V1\Ping;
+namespace App\Http\Controllers\Api\V1\Ping;
 
-use App\Http\Responses\V1\MessageResponse;
-use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Support\Responsable;
+use App\Http\Responses\Api\V1\MessageResponse;
 
 final class ShowController
 {
