@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http;
 
+use Spatie\Csp\AddCspHeaders;
 use App\Http\Middleware\TrimStrings;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\CacheHeaders;
@@ -23,9 +24,15 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use App\Http\Middleware\PreventRequestsDuringMaintenance;
 use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
+use Treblle\SecurityHeaders\Http\Middleware\RemoveHeaders;
 use Illuminate\Foundation\Http\Middleware\ValidatePostSize;
+use Treblle\SecurityHeaders\Http\Middleware\SetReferrerPolicy;
+use Treblle\SecurityHeaders\Http\Middleware\PermissionsPolicy;
+use Treblle\SecurityHeaders\Http\Middleware\ContentTypeOptions;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
+use Treblle\SecurityHeaders\Http\Middleware\StrictTransportSecurity;
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
+use Treblle\SecurityHeaders\Http\Middleware\CertificateTransparencyPolicy;
 
 final class Kernel extends HttpKernel
 {
@@ -51,6 +58,13 @@ final class Kernel extends HttpKernel
                 JsonApiResponseMiddleware::class,
                 ContentEncoding::class,
                 CacheHeaders::class,
+                RemoveHeaders::class,
+                StrictTransportSecurity::class,
+                SetReferrerPolicy::class,
+                PermissionsPolicy::class,
+                ContentTypeOptions::class,
+                CertificateTransparencyPolicy::class,
+                AddCspHeaders::class,
             ],
         ];
 
