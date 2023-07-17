@@ -17,7 +17,7 @@ final class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         $this->routes(function () {
-            Route::middleware(['api', 'treblle'])
+            Route::middleware(['api'])
                 ->prefix('api')
                 ->as('api:')
                 ->group(
