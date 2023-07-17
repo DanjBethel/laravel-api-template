@@ -22,15 +22,10 @@ final class JsonApiResponseMiddleware
          */
         $response = $next($request);
 
-        $response->headers->set(
-            key: 'Content-Type',
-            values: 'application/vnd.api+json',
-        );
-
-        $response->headers->set(
-            key: 'Accept',
-            values: 'application/vnd.api+json',
-        );
+        $response->headers->add([
+            'Accept'       => 'application/json',
+            'Content-Type' => 'application/vnd.api+json'
+        ]);
 
         return $response;
     }
