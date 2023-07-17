@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Database\Factories;
 
 use Domain\User\Models\User;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+use function now;
 
 final class UserFactory extends Factory
 {
@@ -15,10 +17,10 @@ final class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
+            'name'              => $this->faker->name(),
+            'email'             => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => Hash::make(
+            'password'          => Hash::make(
                 value: 'password',
             ),
         ];
