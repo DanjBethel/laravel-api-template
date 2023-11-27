@@ -25,10 +25,10 @@
     "laravel/pint": "^1.6",
     "laravel/sail": "^1.21.1",
     "mockery/mockery": "^1.5.1",
-    "nunomaduro/collision": "^6.4",
+    "nunomaduro/collision": "^7.0",
     "nunomaduro/larastan": "^2.5",
-    "pestphp/pest": "^1.22.5",
-    "pestphp/pest-plugin-laravel": "^1.4",
+    "pestphp/pest": "^2.0",
+    "pestphp/pest-plugin-laravel": "^2.0",
     "roave/security-advisories": "dev-latest",
     "spatie/laravel-ignition": "^2.0"
   },
@@ -68,15 +68,6 @@
     ],
     "test": [
       "./vendor/bin/sail artisan test"
-    ],
-    "deploy": [
-      "composer pint && git add -A && echo 'Enter commit message' && read message && git commit -m \"$message\" && git push"
-    ],
-    "deploy:staging": [
-      "git checkout staging && git merge dev && git push && git checkout dev"
-    ],
-    "deploy:prod": [
-      "git checkout main && git merge staging && git push && git checkout dev"
     ]
   },
   "extra": {
